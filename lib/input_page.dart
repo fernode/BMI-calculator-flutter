@@ -6,7 +6,7 @@ import './reusable_card.dart';
 const footerHeight = 40.0;
 const activeCardColour = Color(0xFF1D1E33);
 const inactiveCardColour = Color(0xFF111328);
-final footerColour = Color(0xFFEB1555);
+const footerColour = Color(0xFFEB1555);
 
 enum Gender { male, female }
 
@@ -16,22 +16,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  bool _isMaleCardActive = false;
-  bool _isFemaleCardActive = false;
-
-  void selectActiveCard(Gender card) {
-    if (card == Gender.male) {
-      setState(() {
-        _isMaleCardActive = true;
-        _isFemaleCardActive = false;
-      });
-    } else {
-      setState(() {
-        _isMaleCardActive = false;
-        _isFemaleCardActive = true;
-      });
-    }
-  }
+  Gender seletedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +31,14 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    selectActiveCard(Gender.male);
+                    setState(() {
+                      seletedGender = Gender.male;
+                    });
                   },
                   child: ReusableCard(
                     child:
                         IconContent(icon: FontAwesomeIcons.mars, name: 'MALE'),
-                    colour: _isMaleCardActive
+                    colour: seletedGender == Gender.male
                         ? activeCardColour
                         : inactiveCardColour,
                   ),
@@ -60,12 +47,14 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    selectActiveCard(Gender.female);
+                    setState(() {
+                      seletedGender = Gender.female;
+                    });
                   },
                   child: ReusableCard(
                     child: IconContent(
                         icon: FontAwesomeIcons.venus, name: 'FEMALE'),
-                    colour: _isFemaleCardActive
+                    colour: seletedGender == Gender.female
                         ? activeCardColour
                         : inactiveCardColour,
                   ),
