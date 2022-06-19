@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import './icon_content.dart';
 import './reusable_card.dart';
 import 'constants.dart';
+import 'result_page.dart';
 
 enum Gender { male, female }
 
@@ -12,7 +13,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender seletedGender;
+  Gender? seletedGender;
   double _currentHeightValue = 155;
   int _weigth = 60;
   int _age = 18;
@@ -183,10 +184,28 @@ class _InputPageState extends State<InputPage> {
               )
             ],
           ),
-          Container(
-            color: kFooterColour,
-            width: double.infinity,
-            height: kFooterHeight,
+          Expanded(
+            child: Container(
+              width: Size.infinite.width,
+              child: ElevatedButton(
+                child: Text('Result'),
+                style: ElevatedButton.styleFrom(
+                  primary: kFooterColour,
+                  shadowColor: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    ResultPage.routeName,
+                    arguments: ResultPageArguments(
+                      _currentHeightValue.toInt(),
+                      _weigth,
+                      _age,
+                    ),
+                  );
+                },
+              ),
+            ),
           )
         ],
       ),
@@ -197,7 +216,7 @@ class _InputPageState extends State<InputPage> {
 class RoundIconButton extends StatelessWidget {
   final Icon icon;
   final void Function() onPressed;
-  RoundIconButton({@required this.icon, @required this.onPressed});
+  RoundIconButton({required this.icon, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
