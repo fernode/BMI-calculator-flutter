@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import './icon_content.dart';
 import './reusable_card.dart';
-
-const footerHeight = 40.0;
-const activeCardColour = Color(0xFF1D1E33);
-const inactiveCardColour = Color(0xFF111328);
-const footerColour = Color(0xFFEB1555);
+import 'constants.dart';
 
 enum Gender { male, female }
 
@@ -18,7 +14,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender seletedGender;
 
-  void selectGender(Gender gender) {
+  selectGender(Gender gender) {
     setState(() {
       seletedGender = gender;
     });
@@ -41,8 +37,8 @@ class _InputPageState extends State<InputPage> {
                   },
                   child: IconContent(icon: FontAwesomeIcons.mars, name: 'MALE'),
                   colour: seletedGender == Gender.male
-                      ? activeCardColour
-                      : inactiveCardColour,
+                      ? kActiveCardColour
+                      : kInactiveCardColour,
                 ),
               ),
               Expanded(
@@ -53,8 +49,25 @@ class _InputPageState extends State<InputPage> {
                   child:
                       IconContent(icon: FontAwesomeIcons.venus, name: 'FEMALE'),
                   colour: seletedGender == Gender.female
-                      ? activeCardColour
-                      : inactiveCardColour,
+                      ? kActiveCardColour
+                      : kInactiveCardColour,
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: ReusableCard(
+                  child: Column(
+                    children: [
+                      Text(
+                        'HEIGHT',
+                        style: kLabelTextStyle,
+                      ),
+                    ],
+                  ),
+                  colour: kActiveCardColour,
                 ),
               )
             ],
@@ -64,32 +77,21 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                 child: ReusableCard(
                   child: Text(''),
-                  colour: activeCardColour,
-                ),
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: ReusableCard(
-                  child: Text(''),
-                  colour: activeCardColour,
+                  colour: kActiveCardColour,
                 ),
               ),
               Expanded(
                 child: ReusableCard(
                   child: Text(''),
-                  colour: activeCardColour,
+                  colour: kActiveCardColour,
                 ),
               )
             ],
           ),
           Container(
-            color: footerColour,
+            color: kFooterColour,
             width: double.infinity,
-            height: footerHeight,
-            margin: EdgeInsets.only(top: 10.0),
+            height: kFooterHeight,
           )
         ],
       ),
