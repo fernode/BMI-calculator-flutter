@@ -13,6 +13,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender seletedGender;
+  double _currentHeightValue = 155;
 
   selectGender(Gender gender) {
     setState(() {
@@ -60,11 +61,41 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                 child: ReusableCard(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'HEIGHT',
                         style: kLabelTextStyle,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(_currentHeightValue.round().toString(),
+                              style: kNumberTextStyle),
+                          Text('cm', style: kLabelTextStyle),
+                        ],
+                      ),
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.white,
+                          inactiveTrackColor: Color(0xFF8D8E98),
+                          thumbColor: Color(0xFFEB1555),
+                          overlayColor: Color(0x29EB1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                        ),
+                        child: Slider(
+                            value: _currentHeightValue,
+                            min: 120,
+                            max: 220,
+                            onChanged: (double value) {
+                              setState(() {
+                                _currentHeightValue = value;
+                              });
+                            }),
+                      )
                     ],
                   ),
                   colour: kActiveCardColour,
