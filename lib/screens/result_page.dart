@@ -46,13 +46,14 @@ class ResultPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('OVERWEIGHT', style: kResultTextStyle),
+                      Text(calculatorBrain.getResult(),
+                          style: kResultTextStyle),
                       Text(calculatorBrain.calculateBmi(),
                           style: kNumberTextStyle),
                       Container(
                         margin: EdgeInsets.all(10),
                         child: Text(
-                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                          calculatorBrain.getInterpretation(),
                           style: TextStyle(
                             fontSize: 16,
                           ),
