@@ -15,7 +15,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender? seletedGender;
   double _currentHeightValue = 155;
-  int _weigth = 60;
+  int _weight = 60;
   int _age = 18;
 
   selectGender(Gender gender) {
@@ -118,7 +118,7 @@ class _InputPageState extends State<InputPage> {
                         style: kLabelTextStyle,
                       ),
                       Text(
-                        _weigth.toString(),
+                        _weight.toString(),
                         style: kNumberTextStyle,
                       ),
                       Row(
@@ -128,7 +128,7 @@ class _InputPageState extends State<InputPage> {
                             icon: Icon(FontAwesomeIcons.minus),
                             onPressed: () {
                               setState(() {
-                                _weigth--;
+                                _weight--;
                               });
                             },
                           ),
@@ -136,7 +136,7 @@ class _InputPageState extends State<InputPage> {
                             icon: Icon(FontAwesomeIcons.plus),
                             onPressed: () {
                               setState(() {
-                                _weigth++;
+                                _weight++;
                               });
                             },
                           ),
@@ -188,10 +188,14 @@ class _InputPageState extends State<InputPage> {
             child: Container(
               width: Size.infinite.width,
               child: ElevatedButton(
-                child: Text('Result'),
+                child: Text('CALCULATE'),
                 style: ElevatedButton.styleFrom(
                   primary: kFooterColour,
                   shadowColor: Colors.white,
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 onPressed: () {
                   Navigator.pushNamed(
@@ -199,7 +203,7 @@ class _InputPageState extends State<InputPage> {
                     ResultPage.routeName,
                     arguments: ResultPageArguments(
                       _currentHeightValue.toInt(),
-                      _weigth,
+                      _weight,
                       _age,
                     ),
                   );
